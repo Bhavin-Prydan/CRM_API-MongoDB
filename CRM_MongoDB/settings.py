@@ -145,9 +145,9 @@ USE_TZ = True
 
 
 # SIMPLE_JWT = {
-# 'ACCESS_TOKEN_LIFETIME': timedelta(seconds=1800),
-# 'REFRESH_TOKEN_LIFETIME': timedelta(seconds=2400)
-# # 'REFRESH_TOKEN_LIFETIME': timedelta(days=2)
+# 'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+# # 'REFRESH_TOKEN_LIFETIME': timedelta(seconds=2400)
+# 'REFRESH_TOKEN_LIFETIME': timedelta(days=2)
 # }
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
@@ -170,11 +170,14 @@ JAZZMIN_SETTINGS = {
     "order_with_respect_to": ["auth", "api"],
     }
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
 STATIC_URL = '/static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static')
+]
+STATIC_ROOT=os.path.join(BASE_DIR,'assets')
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')

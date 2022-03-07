@@ -7,6 +7,10 @@ from api import views
 from rest_framework.routers import DefaultRouter
 from rest_framework import permissions
 
+# from rest_framework_simplejwt.views import (
+#     TokenObtainPairView,
+#     TokenRefreshView,
+# )
 router = DefaultRouter()
 
 router.register('User',views.UserViewSet,basename='user'),
@@ -17,4 +21,4 @@ urlpatterns = [
 	# path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
  #    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-]
+]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
