@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-
+from pymongo.mongo_client import MongoClient
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-yf_=$2l-dcqkn3m(unu)rbnunn)2ap+jv6*m$*zs0+s)g(pqlo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -88,10 +88,22 @@ WSGI_APPLICATION = 'CRM_MongoDB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'crm_db',
+        'NAME': 'prydan-crm-database',
+        # 'CLIENT': {
+        #    'host': 'prydan-crm-database.mongo.cosmos.azure.com',
+        #    'port' : 10255,
+        #    'username' : 'prydan-crm-database',
+        #    'password' : 'D8hdOZp0GLu2uiK6dq0RXrR2AHVgmXWqXXnz0rxIXutyknVcvLMu2uvw9jvcVQfErtbTAl2xw8ARNI8mXBn54g==',
+        # }
+        # 'HOST' : 'mongodb:+srv//prydan-crm-database:D8hdOZp0GLu2uiK6dq0RXrR2AHVgmXWqXXnz0rxIXutyknVcvLMu2uvw9jvcVQfErtbTAl2xw8ARNI8mXBn54g==@prydan-crm-database.mongo.cosmos.azure.com:10255/?ssl=true&ssl_cert_reqs=CERT_NONE&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@prydan-crm-database@',
+        # 'HOST' : 'prydan-crm-database.mongo.cosmos.azure.com',
+        # 'PORT' : 10255,
+        # 'USER' : 'prydan-crm-database',
+        # 'PASSWORD' : 'D8hdOZp0GLu2uiK6dq0RXrR2AHVgmXWqXXnz0rxIXutyknVcvLMu2uvw9jvcVQfErtbTAl2xw8ARNI8mXBn54g==',
     }
 }
 
+MongoClient.HOST = 'mongodb://prydan-crm-database:D8hdOZp0GLu2uiK6dq0RXrR2AHVgmXWqXXnz0rxIXutyknVcvLMu2uvw9jvcVQfErtbTAl2xw8ARNI8mXBn54g==@prydan-crm-database.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@prydan-crm-database@'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -162,22 +174,21 @@ JAZZMIN_SETTINGS = {
     # Welcome text on the login screen
     "welcome_sign": "Welcome to the Prydan CRM",
 
-     "copyright": "Prydan CRM Ltd",
+    "copyright": "Prydan CRM Ltd",
 
     # The model admin to search from the search bar, search bar omitted if excluded
     "search_model": "auth.User",
 
     "order_with_respect_to": ["auth", "api"],
-    }
+}
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
+    os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT=os.path.join(BASE_DIR,'assets')
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 
-
-MEDIA_URL='/media/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
